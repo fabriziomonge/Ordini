@@ -154,7 +154,7 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     df_definitivo
     
 
-    csv = df_definitivo.to_excel(index=False)
+    csv = df_definitivo.to_excel(index=False, engine='xlsxwriter')
     b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
     href = f'<a href="data:file/csv;base64,{b64}">Scarica il file</a>'
     
