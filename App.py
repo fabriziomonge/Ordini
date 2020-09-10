@@ -5,6 +5,7 @@
 
 
 import pandas as pd
+import streamlit as st
 
 #Importo i dati
 uploaded_file1 = st.sidebar.file_uploader("Carica il file Excel di AMAZON", type=["xlsx"])
