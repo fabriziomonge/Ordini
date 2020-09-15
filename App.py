@@ -7,6 +7,8 @@ import base64
 import pandas as pd
 import streamlit as st
 
+st.title("Elaboratore ordini")
+
 #Importo i dati
 uploaded_file1 = st.sidebar.file_uploader("Carica il file Excel di AMAZON", type=["xlsx"])
 uploaded_file2 = st.sidebar.file_uploader("Carica il file Excel di Bongiovanni", type=["xlsx"])
