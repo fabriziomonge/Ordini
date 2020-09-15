@@ -154,6 +154,8 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
 
     df_definitivo['Numero del lotto(se applicabile)'] = lista_lotto_str
 
+    df_definitivo
+    
     df_definitivo.to_excel('dati_ordini.xlsx')
     
     # Controllo se ci sono tutti i colli necessari
@@ -181,7 +183,7 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     ftp.quit()
     print('Ordini caricati sul server')
 
-    df_definitivo
+    
     st.write("""## Puoi scaricare il file a questo link""")
     st.write('http://www.sphereresearch.net/Bongiovanni/dati_ordini.xlsx')
     
