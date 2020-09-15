@@ -153,8 +153,12 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     df_definitivo['Numero del lotto(se applicabile)'] = lista_lotto_str
 
     df_definitivo.to_excel('definitivo.xlsx')
+    
+    richiamo = pd.read_excel('definitivo.xlsx')
 
     df_definitivo
+    st.write("richiamato")
+    richiamo
     
 
 
