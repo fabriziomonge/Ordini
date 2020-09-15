@@ -156,7 +156,22 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
 
     df_definitivo.to_excel('dati_ordini.xlsx')
     
+    # Controllo se ci sono tutti i colli necessari
     
+    colli_presenti= list(df_lavorato.collo.unique())
+    colli_necessari = list(range(1, df_lavorato.collo.unique().max()+3))
+    lista_mancanti = []
+
+    for i in colli_necessari:
+        if i not in colli_presenti:
+            lista_mancanti.append(i)
+
+    if len(lista_mancanti) >0 :
+        st.write("## Eccezione: nella conferma d'ordine mancano i colli: ", lista_mancanti)
+        st.write("Colli necessari:", colli_necessari)
+        st.write("Colli_presenti:",colli_presenti)
+else:
+    st.write("## Controllo effettuato: tutti i colli necessari sono presenti nella conferma di ordine")
     
     ftp = FTP('ftp.onstatic-it.setupdns.net')     # connect to host, default port
     ftp.login(user='fabrizio.monge', passwd='Ciuciuska88')
