@@ -6,6 +6,8 @@
 import base64
 import pandas as pd
 import streamlit as st
+from ftplib import FTP
+import ftplib
 
 st.title("Elaboratore ordini")
 
@@ -155,6 +157,15 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     df_definitivo.to_excel('definitivo.xlsx')
     
     richiamo = pd.read_excel('definitivo.xlsx')
+    
+    ftp = FTP('ftp.onstatic-it.setupdns.net')     # connect to host, default port
+    ftp.login(user='fabrizio.monge', passwd='Ciuciuska88')
+    ftp.cwd('Bongiovanni') 
+    file = open('dati_ordini.xlsx', 'rb')
+    ftp.storbinary('STOR dati_ordini.xlsx', file)
+    file.close()
+    ftp.quit()
+    print('Ordini caricati sul server')
 
     df_definitivo
     st.write("richiamato")
