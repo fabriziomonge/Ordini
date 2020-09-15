@@ -159,7 +159,7 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     # Controllo se ci sono tutti i colli necessari
     
     colli_presenti= list(df_lavorato.collo.unique())
-    colli_necessari = list(range(1, df_lavorato.collo.unique().max()+3))
+    colli_necessari = list(range(1, df_lavorato.collo.unique().max()+1))
     lista_mancanti = []
 
     for i in colli_necessari:
@@ -170,8 +170,8 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
         st.write("## Eccezione: nella conferma d'ordine mancano i colli: ", lista_mancanti)
         st.write("Colli necessari:", colli_necessari)
         st.write("Colli_presenti:",colli_presenti)
-else:
-    st.write("## Controllo effettuato: tutti i colli necessari sono presenti nella conferma di ordine")
+    else:
+        st.write("## Controllo effettuato: tutti i colli necessari sono presenti nella conferma di ordine")
     
     ftp = FTP('ftp.onstatic-it.setupdns.net')     # connect to host, default port
     ftp.login(user='fabrizio.monge', passwd='Ciuciuska88')
