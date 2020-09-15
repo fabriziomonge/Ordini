@@ -168,8 +168,7 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
 
     if len(lista_mancanti) >0 :
         st.write("## Eccezione: nella conferma d'ordine mancano i colli: ", lista_mancanti)
-        st.write("Colli necessari:", colli_necessari)
-        st.write("Colli_presenti:",colli_presenti)
+
     else:
         st.write("## Controllo effettuato: tutti i colli necessari sono presenti nella conferma di ordine")
     
