@@ -11,6 +11,10 @@ import ftplib
 
 st.title("Elaboratore ordini")
 
+from PIL import Image
+image = Image.open('Tool.png')
+st.sidebar.image(image, use_column_width=True)
+
 #Importo i dati
 uploaded_file1 = st.sidebar.file_uploader("Carica il file Excel di AMAZON", type=["xlsx"])
 uploaded_file2 = st.sidebar.file_uploader("Carica il file Excel di Bongiovanni", type=["xlsx"])
