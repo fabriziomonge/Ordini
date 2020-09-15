@@ -156,7 +156,7 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
 
     df_definitivo.to_excel('dati_ordini.xlsx')
     
-    richiamo = pd.read_excel('dati_ordini.xlsx')
+    
     
     ftp = FTP('ftp.onstatic-it.setupdns.net')     # connect to host, default port
     ftp.login(user='fabrizio.monge', passwd='Ciuciuska88')
@@ -168,8 +168,9 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     print('Ordini caricati sul server')
 
     df_definitivo
-    st.write("richiamato")
-    richiamo
+    st.write('http://www.sphereresearch.net/Bongiovanni/dati_ordini.xlsx')
+    
+    
     
 
 
