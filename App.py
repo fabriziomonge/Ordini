@@ -34,6 +34,7 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     #Importo il file di Bongiovanni
 
     df1 = pd.read_excel(uploaded_file2)
+    df1['collo a'] = df1['collo a'].fillna(df1['collo da'])
 
     # elimino i non confermati
     df1 = df1.loc[df1['Quantita confermata']>0]
@@ -85,7 +86,12 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
 
 
     df_lavorato['Quantita spedita'] = lista_Q2    
-
+    
+    #Creo una colonna con la vecchia quantità confermata per controllo
+    
+    df_lavorato['quantità_old'] = df.Confermati
+    df_lavorato.loc[df_lavorato['quantità_old'] != df_lavorato['quantità_old']]
+    
     # creo una colonna collo univoca
 
     aggiunta = 0
@@ -158,18 +164,30 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     
     df_definitivo.to_excel('dati_ordini.xlsx')
     
-    # Controllo se ci sono tutti i colli necessari
-    
+    # Alcune misure
     colli_presenti= list(df_lavorato.collo.unique())
     colli_necessari = list(range(1, df_lavorato.collo.unique().max()+1))
     lista_mancanti = []
+    
+    Colli_tot_necessari = len(colli_necessari)
+    Colli_totali_presenti = len(colli_presenti)
+    Totale_articoli = df_definitivo.Spediti.sum()
+    
+    st.write("""### Sono richiesti""",Colli_tot_necessari,""" Colli""" )
+    st.write("""### Sono in spedizione""",Colli_totali_presenti,""" Colli""" )
+    st.write("""### Stai per inviare""",Totale_articoli,""" Articoli""" )
+    
+    # Controllo se ci sono tutti i colli necessari
+    
+
 
     for i in colli_necessari:
         if i not in colli_presenti:
             lista_mancanti.append(i)
 
     if len(lista_mancanti) >0 :
-        st.write("## Eccezione: nella conferma d'ordine mancano i colli: ", lista_mancanti)
+        st.write("### >Eccezione: nella conferma d'ordine mancano i colli: ")
+        st.markdown(lista_mancanti)
 
     else:
         st.write("## Controllo effettuato: tutti i colli necessari sono presenti nella conferma di ordine")
@@ -186,6 +204,7 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     
     st.write("""## Puoi scaricare il file a questo link""")
     st.write('http://www.sphereresearch.net/Bongiovanni/dati_ordini.xlsx')
+    
     
     
     
