@@ -89,8 +89,8 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     
     #Creo una colonna con la vecchia quantità confermata per controllo
     
-    df_lavorato['quantità_old'] = df.Confermati
-    df_lavorato.loc[df_lavorato['quantità_old'] != df_lavorato['quantità_old']]
+#     df_lavorato['quantità_old'] = df.Confermati
+#     df_lavorato.loc[df_lavorato['quantità_old'] != df_lavorato['quantità_old']]
     
     # creo una colonna collo univoca
 
