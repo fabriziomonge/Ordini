@@ -35,6 +35,10 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     lista_prodotti_univoci['progressivo']=lista_prodotti_univoci.index
     lista_prodotti_univoci = lista_prodotti_univoci.set_index('prodotto', drop=True)
 
+    #creo un dataframe di prodotti univoci
+
+
+
     #Importo il file di Bongiovanni
 
     df1 = pd.read_excel(uploaded_file2)
@@ -63,24 +67,28 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     lista_Q2 = []
 
     i = 0
-    while i < (len(df_lavorato)):
-        Q = int(df_lavorato['Quantita confermata'][i])
-        C = int(df_lavorato['colli_nel_range'][i])
+    while i < (len(df_lavorato)): #len(df_lavorato)
+        Q =int(df_lavorato['Quantita confermata'][i])
+        C =int(df_lavorato['colli_nel_range'][i])
         if C > 1:
             div = Q/C
             divint = Q//C
 
             if div == divint:
+                
                 for i2 in range(C):
                     Q2 = Q/C
                     lista_Q2.append(Q2)
                     i = i+1
             else:
+                
+                somma = 0
                 for i2 in range(C-1):
-                    Q2 = Q//(C-1)
+                    Q2 = round(Q/C,0)
                     lista_Q2.append(Q2)
+                    somma = somma+Q2
                     i = i+1
-                Q2 = Q%(C-1)
+                Q2 = Q-somma
                 lista_Q2.append(Q2)
                 i=i+1
 
@@ -93,8 +101,8 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     
     #Creo una colonna con la vecchia quantità confermata per controllo
     
-#     df_lavorato['quantità_old'] = df.Confermati
-#     df_lavorato.loc[df_lavorato['quantità_old'] != df_lavorato['quantità_old']]
+    # df_lavorato['quantità_old'] = df.Confermati
+    # df_lavorato.loc[df_lavorato['quantità_old'] != df_lavorato['quantità_old']]
     
     # creo una colonna collo univoca
 
@@ -130,6 +138,32 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
         etichetta = df_etichette_univoci['Etichetta'][i]
         lista_etichetta.append(etichetta)
     df_lavorato['Codice di riferimento corriere']=lista_etichetta
+
+
+    # faccio in modo da ricopiare i campi [Confermati, ID esterno, NUmero mod, Asin] di Amazon (df)
+    lista_confermati = []
+    lista_ID = []
+    lista_modello = []
+    lista_asin =[]
+
+    for i in df_lavorato.Titolo:
+        settore = df.loc[df.Titolo== i].head(1)
+        settore = settore.reset_index(drop=True)
+
+        quantita = settore['Confermati'][0]
+        id = settore['ID esterno'][0]
+        modello = settore['Numero modello'][0]
+        asin = settore['ASIN'][0]
+
+        lista_confermati.append(int(quantita))
+        lista_ID.append(id)
+        lista_modello.append(modello)
+        lista_asin.append(asin)
+    
+    df_lavorato['Quantita confermata'] = lista_confermati
+    df_lavorato['Numero esterno'] = lista_ID
+    df_lavorato['Numero modello'] = lista_modello
+    df_lavorato['ASIN'] = lista_asin
 
     # Compilo il df definitivo
 
@@ -209,9 +243,5 @@ if uploaded_file1 is not None and uploaded_file2 is not None:
     st.write("""## Puoi scaricare il file a questo link""")
     st.write('http://www.sphereresearch.net/Bongiovanni/dati_ordini.xlsx')
     
+   
     
-    
-    
-
-
-
