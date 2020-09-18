@@ -57,6 +57,9 @@ try:
         st.sidebar.markdown(Utente)
         st.sidebar.markdown("Ruolo:")
         st.sidebar.markdown(accessi['Tipo'][Utente])
+        st.sidebar.markdown(" ")
+        st.sidebar.markdown("A questo link puoi trovare un breve video tutorial della applicazione")
+        st.sidebar.markdown("http://www.sphereresearch.net//Bongiovanni/Tutorial2_0.mp4")
 
         if uploaded_file1 is not None and uploaded_file2 is not None:
 
