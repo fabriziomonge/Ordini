@@ -377,7 +377,7 @@ try:
                 print('Ordini caricati sul server')
 
                 
-                st.write("""### > Puoi scaricare il file a questo link""")
+                st.write("""### > Se i controlli precedenti sono stati superati, puoi scaricare il file a questo link""")
                 st.write('http://www.sphereresearch.net/Bongiovanni/dati_ordini.xlsx')
 
     else:
