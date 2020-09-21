@@ -363,7 +363,7 @@ try:
             st.write(""" """)
             st.write(""" """)
 
-            bottone = st.button("Clicca qui per confermare e generare il file")
+            bottone = True #st.button("Clicca qui per confermare e generare il file")
 
             if bottone == True:
 
