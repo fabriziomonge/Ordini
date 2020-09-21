@@ -9,7 +9,7 @@ import streamlit as st
 from ftplib import FTP
 import ftplib
 
-st.title("Elaboratore ordini WebApp-2.0")
+st.title("Elaborazione ordini WebApp-2.0")
 
 from PIL import Image
 image = Image.open('Tool.png')
