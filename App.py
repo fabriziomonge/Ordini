@@ -25,6 +25,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
 
+#Da qua incolla su server
 #controllo accessi
 
 url = 'http://www.sphereresearch.net//Bongiovanni/Accessi_Bongiovanni.xlsx'
@@ -57,13 +58,42 @@ try:
         st.sidebar.markdown(Utente)
         st.sidebar.markdown("Ruolo:")
         st.sidebar.markdown(accessi['Tipo'][Utente])
-        st.sidebar.markdown(" ")
-        st.sidebar.markdown("A questo link puoi trovare un breve video tutorial della applicazione")
-        st.sidebar.markdown("http://www.sphereresearch.net//Bongiovanni/Tutorial2_0.mp4")
 
-        if uploaded_file1 is not None and uploaded_file2 is not None:
+        if uploaded_file1 is not None:
 
             df=pd.read_excel(uploaded_file1, header=4)
+            st.write("""### File Amazon importato""")
+            df_show = df.head(3)
+            df_show
+
+        if uploaded_file2 is not None:
+
+            df1=pd.read_excel(uploaded_file2)
+            st.write("""### File Azienda importato""")
+            df1_show = df1.head(3)
+            df1_show
+
+            lista_colonne_corretta = ['Numero OdA/Ordine', 'Numero esterno', 'Numero modello', 'ASIN', 'Titolo', 'Prezzo di listino', 'Sconto', 'Costo', 'Quantita confermata', 'scadenza', 'lotto', 'collo da', 'collo a']
+            lista_colonne_inserita = list(df1.columns)
+
+            if lista_colonne_inserita[:len(lista_colonne_corretta)] == lista_colonne_corretta:
+                st.write("""#### il formato inserito corrisponde al template""")
+                st.write("""### Procedo con l'elaborazione dei dati....""")
+                controllo = True
+            else:
+                st.write("""### Il formato del "File azienda" inserito non corrisponde al template""")
+                controllo = False
+                bottone_aggiusta = st.button("Clicca qui per tentare di sistemare il formato automaticamente")
+                if bottone_aggiusta == True:
+                    lista_colonne_inserita[:len(lista_colonne_corretta)] = lista_colonne_corretta
+                    df1 = pd.DataFrame(df1.values, columns = lista_colonne_inserita)
+                    controllo = True
+                    st.write("""### Il formato del file è stato sistemato""")
+                    st.write("""### Procedo con l'elaborazione dei dati....""")
+
+        if uploaded_file1 is not None and uploaded_file2 is not None and controllo == True:
+
+            # df=pd.read_excel(uploaded_file1, header=4)
 
             #creo univoco etichette
 
@@ -83,7 +113,7 @@ try:
 
             #Importo il file di Bongiovanni
 
-            df1 = pd.read_excel(uploaded_file2)
+            # df1 = pd.read_excel(uploaded_file2)
             df1['collo a'] = df1['collo a'].fillna(df1['collo da'])
 
             # elimino i non confermati
