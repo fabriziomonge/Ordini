@@ -387,6 +387,6 @@ try:
                     st.write('http://www.sphereresearch.net/Bongiovanni/dati_ordini.xlsx')
 
     else:
-        st.write("""#### Credenziali non abilitate""")
+        st.write("""#### Non è possibile processare l'ordine - VERIFICARE I FILES INSERITI E RIPROVARE""")
 except:
     st.write("Inserire credenziali valide")
